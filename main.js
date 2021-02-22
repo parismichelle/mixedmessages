@@ -70,7 +70,3 @@ const complimentGenerator = () => {
 }
 
 console.log(complimentGenerator().join(''));
-
-/* console.log(process.argv);
-console.log(process.argv[2]);
-*/
