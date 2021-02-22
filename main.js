@@ -1,4 +1,11 @@
-const beginning = [['You are as ', 'ADJECTIVE', ' as a ', 'FIRSTNOUN', ' ', 'PREPOSITION', ' ', 'LASTNOUN', '.'], 
+/*
+Sentence structure:
+You are as --- as a --- preposition ---.
+You are more --- than a --- preposition ---. 
+You are --- like a --- preposition ---. 
+*/
+
+const shell = [['You are as ', 'ADJECTIVE', ' as a ', 'FIRSTNOUN', ' ', 'PREPOSITION', ' ', 'LASTNOUN', '.'], 
 ['You are more ', 'ADJECTIVE', ' than a ', 'FIRSTNOUN', ' ', 'PREPOSITION', ' ', 'LASTNOUN', '.'], 
 ['You are ', 'ADJECTIVE', ' like a ', 'FIRSTNOUN', ' ', 'PREPOSITION', ' ', 'LASTNOUN', '.']];
 
@@ -23,10 +30,46 @@ const lastNounOn = ['Friday night', 'Sunday morning', 'Monday afternoon', 'summe
 'vacation', 'table', 'shelf', 'Hawaiian island', 'holiday', 'boat', 'mountain', 'weekend', 'beach']
 
 
+//generates a random number based on the length of an array
+const randNumGen = arr => {
+    let num = Math.floor(Math.random() * arr.length);
+    return num;
+}
 
-//You are as --- as a --- preposition ---.
-//You are more --- than a --- preposition ---. 
-//You are --- like a --- preposition ---. 
+let compliment = [];
+
+//functions to assist in locating sentence elements
+const isAdjective = (element) => element === 'ADJECTIVE';
+const isFirstNoun = (element) => element === 'FIRSTNOUN';
+const isPreposition = (element) => element === 'PREPOSITION';
+const isLastNoun = (element) => element === 'LASTNOUN';
+
+//generates a random compliment by randomly selecting components of arrays
+const complimentGenerator = () => {
+    //choose a sentence shell
+    compliment = shell[randNumGen(shell)];
+    //select adjective
+    let adjectiveIndex = compliment.findIndex(isAdjective);
+    compliment.splice(adjectiveIndex, 1, adjective[randNumGen(adjective)]);
+    //select first noun
+    let firstNounIndex = compliment.findIndex(isFirstNoun);
+    compliment.splice(firstNounIndex, 1, firstNoun[randNumGen(firstNoun)]);
+    //select preposition
+    let prepositionIndex = compliment.findIndex(isPreposition);
+    compliment.splice(prepositionIndex, 1, preposition[randNumGen(preposition)]);
+    //select last noun based on preposition
+    let lastNounIndex = compliment.findIndex(isLastNoun);
+    if(compliment.includes('in the')){
+        compliment.splice(lastNounIndex, 1, lastNounIn[randNumGen(lastNounIn)]);
+    } else if (compliment.includes('at')){
+        compliment.splice(lastNounIndex, 1, lastNounAt[randNumGen(lastNounAt)]);
+    } else {
+        compliment.splice(lastNounIndex, 1, lastNounOn[randNumGen(lastNounOn)]);
+    };
+    return compliment;
+}
+
+console.log(complimentGenerator().join(''));
 
 /* console.log(process.argv);
 console.log(process.argv[2]);
