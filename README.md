@@ -4,7 +4,7 @@ Generates random compliments.
 
 ## Motivation
 
-Created to satisfy Portfolio Porject 1 for beginning and intermediate Javascript modules on Codecademy. 
+Created to satisfy Portfolio Project 1 for beginning and intermediate Javascript modules on Codecademy. 
 
 ### Language
 
